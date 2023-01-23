@@ -8,6 +8,6 @@ const app = createApp(App)
 
 installPlugins(app)
 
-app.mount("#app")
+app.mount("#__vue")
 
 export { app }
