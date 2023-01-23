@@ -1,3 +1,3 @@
 <template>
-  <v-btn>hello world</v-btn>
+  <v-btn prepend-icon="waving_hand">hello world!</v-btn>
 </template>
