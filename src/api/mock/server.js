@@ -9,13 +9,15 @@ function mockServer({ environment = "development" } = {}) {
     },
 
     seeds(server) {
-      server.create("user", { name: "Bob" })
-      server.create("user", { name: "Alice" })
+      server.create("user", { username: "joaoprocopio" })
+      server.create("user", { username: "alliceprocopio" })
     },
 
     routes() {
-      this.get("/users", (schema) => {
-        return schema.users.all()
+      this.get("users/:username", (schema, request) => {
+        const username = request.params.username
+
+        return schema.users.findBy({ username: username })
       })
     },
   })

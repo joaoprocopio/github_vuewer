@@ -5,7 +5,7 @@ const searchUser = (username, page, perPage) =>
     `/search/users?q=${username}&page=${page}&per_page=${perPage}`
   )
 
-const getUser = (username) => githubHttpClient.get(`users/${username}`)
+const getUser = (username) => githubHttpClient.get(`/users/${username}`)
 
 const GithubApi = {
   searchUser,
