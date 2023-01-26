@@ -1,9 +1,9 @@
 import axios from "axios"
 
-const isDevelopment = process.env.NODE_ENV === "development"
+import { env } from "@/configs"
 
 const githubHttpClient = axios.create({
-  baseURL: isDevelopment ? undefined : "https://api.github.com/",
+  baseURL: env.isMock ? undefined : env.apiUrl,
   timeout: 60000,
 })
 

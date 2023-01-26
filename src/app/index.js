@@ -2,10 +2,11 @@ import App from "./App.vue"
 
 import { createApp } from "vue"
 
+import { env } from "@/configs"
 import { installPlugins } from "~/plugins"
 import { mockServer } from "~/api"
 
-if (process.env.NODE_ENV === "development") {
+if (env.isDev && env.isMock) {
   mockServer()
 }
 
