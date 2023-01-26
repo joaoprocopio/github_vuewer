@@ -1,6 +1,6 @@
 import { createServer, Model } from "miragejs"
 
-function mockServer({ environment = "development" } = {}) {
+const mockServer = ({ environment = "development" } = {}) => {
   let server = createServer({
     environment,
 
