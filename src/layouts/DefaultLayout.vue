@@ -1,5 +1,11 @@
 <template>
-  <v-main>
+  <AppHeader />
+  <VMain>
     <slot />
-  </v-main>
+  </VMain>
+  <AppFooter />
 </template>
+
+<script setup>
+  import { AppHeader, AppFooter } from "~/components"
+</script>
