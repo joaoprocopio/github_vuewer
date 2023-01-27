@@ -1,9 +1,9 @@
 <template>
-  <Layout>
+  <AppLayout>
     <RouterView />
-  </Layout>
+  </AppLayout>
 </template>
 
 <script setup>
-  import Layout from "./Layout.vue"
+  import AppLayout from "./AppLayout.vue"
 </script>
