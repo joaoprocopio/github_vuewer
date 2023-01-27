@@ -1,10 +1,10 @@
-import { HomeView } from "~/pages"
+import { HomePage } from "~/pages"
 
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: HomeView,
+    component: HomePage,
+    name: "home-page",
   },
 ]
 
