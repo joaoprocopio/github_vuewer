@@ -4,6 +4,8 @@
   <VMain>
     <slot />
   </VMain>
+
+  <VFooter />
 </template>
 
 <script setup>
