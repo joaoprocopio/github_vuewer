@@ -1,7 +1,7 @@
 <template>
   <VAppBar
     class="px-4"
-    elevation="0">
+    elevation="1">
     <template #prepend>
       <VBtn
         class="mr-2"
@@ -10,7 +10,7 @@
         icon="home" />
     </template>
 
-    <VResponsive max-width="500">
+    <VResponsive max-width="600">
       <AppBarSearch />
     </VResponsive>
 
