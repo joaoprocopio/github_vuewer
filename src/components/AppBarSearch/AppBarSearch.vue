@@ -1,13 +1,35 @@
 <template>
-  <VForm @submit.prevent="search">
+  <VForm @submit.prevent="$emit('search-page')">
     <VAutocomplete
       v-model="searchParam"
-      :loading="isLoading"
-      hide-details="auto"
+      :loading="$props.isLoading"
+      :items="$props.searchResult"
+      hide-no-data
       density="compact"
+      hide-details="auto"
       variant="filled"
-      prepend-inner-icon="search" />
+      prepend-inner-icon="search"
+      @input="$emit('search-bar', searchParam)" />
   </VForm>
 </template>
 
-<script setup></script>
+<script setup>
+  import { ref } from "vue"
+
+  const $emit = defineEmits(["search-bar", "search-page"])
+
+  const $props = defineProps({
+    isLoading: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    searchResult: {
+      type: Array,
+      required: true,
+      default: () => [],
+    },
+  })
+
+  const searchParam = ref("")
+</script>

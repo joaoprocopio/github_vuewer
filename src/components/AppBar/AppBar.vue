@@ -1,7 +1,7 @@
 <template>
   <VAppBar
     class="px-4"
-    elevation="1">
+    elevation="0">
     <template #prepend>
       <VBtn
         class="mr-2"
@@ -11,7 +11,11 @@
     </template>
 
     <VResponsive max-width="600">
-      <AppBarSearch />
+      <AppBarSearch
+        :is-loading="false /* todo */"
+        :search-result="[] /* todo */"
+        @search-bar="/* todo */"
+        @search-page="/* todo */" />
     </VResponsive>
 
     <template #append>
