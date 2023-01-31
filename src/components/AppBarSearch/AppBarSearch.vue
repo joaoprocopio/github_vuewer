@@ -1,8 +1,8 @@
 <template>
-  <VForm @submit.prevent="$emit('search-page')">
+  <VForm @submit.prevent="$emit('search-page', searchParam)">
     <VAutocomplete
       v-model="searchParam"
-      :loading="$props.isLoading"
+      :loading="$props.isSearching"
       :items="$props.searchResult"
       hide-no-data
       density="compact"
@@ -19,7 +19,7 @@
   const $emit = defineEmits(["search-bar", "search-page"])
 
   const $props = defineProps({
-    isLoading: {
+    isSearching: {
       type: Boolean,
       required: true,
       default: false,

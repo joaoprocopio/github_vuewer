@@ -12,10 +12,8 @@
 
     <VResponsive max-width="600">
       <AppBarSearch
-        :is-loading="false /* todo */"
-        :search-result="[] /* todo */"
-        @search-bar="/* todo */"
-        @search-page="/* todo */" />
+        :is-searching="$search.isSearching"
+        :search-result="$search.searchResult" />
     </VResponsive>
 
     <template #append>
@@ -30,7 +28,8 @@
 
 <script setup>
   import { AppBarSearch } from "~/components"
-  import { useGlobalTheme } from "~/stores"
+  import { useGlobalTheme, useSearch } from "~/stores"
 
   const $globalTheme = useGlobalTheme()
+  const $search = useSearch()
 </script>
