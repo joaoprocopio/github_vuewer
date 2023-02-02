@@ -1,4 +1,4 @@
-const debouncer = (func, delay) => {
+const debouncer = (func, delay = 300) => {
   let timer
 
   return (...args) => {

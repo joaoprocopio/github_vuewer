@@ -6,7 +6,9 @@
       :disabled="$props.isDisabled"
       :items="$props.searchResult"
       :prepend-inner-icon="$props.icon"
+      item-title="login"
       hide-no-data
+      on-update:search=""
       density="compact"
       hide-details="auto"
       variant="filled"
