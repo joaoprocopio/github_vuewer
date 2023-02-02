@@ -1,7 +1,9 @@
 <template>
   <VAppBar
     class="px-4"
-    elevation="0">
+    elevation="0"
+    density="comfortable"
+    border>
     <template #prepend>
       <VBtn
         class="mr-2"
@@ -10,10 +12,13 @@
         icon="home" />
     </template>
 
-    <VResponsive max-width="600">
-      <AppBarSearch
-        :is-searching="$search.isSearching"
-        :search-result="$search.searchResult" />
+    <VResponsive
+      class="mr-8"
+      max-width="300">
+      <AppBarSearch icon="person" />
+    </VResponsive>
+    <VResponsive max-width="300">
+      <AppBarSearch icon="book" />
     </VResponsive>
 
     <template #append>

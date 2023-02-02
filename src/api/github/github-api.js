@@ -1,15 +1,14 @@
 import { githubHttpClient } from "./github-http-client"
 
-const searchUser = (username, page, perPage) =>
-  githubHttpClient.get(
-    `/search/users?q=${username}&page=${page}&per_page=${perPage}`
-  )
+const searchUser = (username) =>
+  githubHttpClient.get(`/search/users?q=${username}`)
 
-const getUser = (username) => githubHttpClient.get(`/users/${username}`)
+const searchRepo = (query) =>
+  githubHttpClient.get(`/search/repositories?q=${query}`)
 
 const GithubApi = {
   searchUser,
-  getUser,
+  searchRepo,
 }
 
 export { GithubApi }
