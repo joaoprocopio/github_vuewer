@@ -18,7 +18,7 @@
       <AppBarSearch icon="person" />
     </VResponsive>
     <VResponsive max-width="300">
-      <AppBarSearch icon="book" />
+      <AppBarSearch icon="collections_bookmark" />
     </VResponsive>
 
     <template #append>
