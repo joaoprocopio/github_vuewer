@@ -1,18 +1,13 @@
 import { $axios } from "./axios"
 
-const searchUser = (params) =>
-  $axios
-    .get("/search/users", { params: params })
-    .then((response) => response.data)
+const searchUsers = (params) => $axios.get("/search/users", { params: params })
 
-const searchRepo = (query) =>
-  $axios
-    .get(`/search/repositories?q=${query}`)
-    .then((response) => response.data)
+const searchRepos = (params) =>
+  $axios.get("/search/repositories", { params: params })
 
 const GithubApi = {
-  searchUser,
-  searchRepo,
+  searchUsers,
+  searchRepos,
 }
 
 export { GithubApi }

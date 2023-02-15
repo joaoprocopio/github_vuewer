@@ -42,9 +42,9 @@
 </template>
 
 <script setup>
+  import { GithubServices } from "~/services"
   import { AppBarSearch } from "~/components"
   import { useGlobalTheme, useSearch } from "~/stores"
-  import { GithubApi } from "~/api"
   import { debounce } from "lodash"
 
   const $globalTheme = useGlobalTheme()
@@ -52,7 +52,7 @@
   const $repositorySearch = useSearch()
 
   const searchUser = debounce(async (params) => {
-    $userSearch.searchResult = await GithubApi.searchUser(params).then(
+    $userSearch.searchResult = await GithubServices.searchUsers(params).then(
       (response) => response.items
     )
   }, 500)

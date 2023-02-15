@@ -1,4 +1,4 @@
 export function seeds(server) {
   server.loadFixtures()
-  server.createList("user", 500)
+  server.createList("user", 1000)
 }
