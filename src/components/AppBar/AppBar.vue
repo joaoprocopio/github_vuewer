@@ -44,8 +44,8 @@
 <script setup>
   import { AppBarSearch } from "~/components"
   import { useGlobalTheme, useSearch } from "~/stores"
-  import { debouncer } from "~/utils"
   import { GithubApi } from "~/api"
+  import { debounce } from "lodash"
 
   const $globalTheme = useGlobalTheme()
   const $userSearch = useSearch()
@@ -60,8 +60,8 @@
       return error
     }
   }
-  const searchUserDebounced = debouncer(() => searchUser(), 500)
+  const searchUserDebounced = debounce(() => searchUser(), 500)
 
   const searchRepository = () => console.log("aiusdhaiusdh")
-  const searchRepositoryDebounced = debouncer(() => searchRepository())
+  const searchRepositoryDebounced = debounce(() => searchRepository())
 </script>
