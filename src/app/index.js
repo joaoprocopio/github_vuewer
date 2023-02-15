@@ -4,7 +4,7 @@ import { createApp } from "vue"
 
 import { env } from "@/configs"
 import { installPlugins } from "~/plugins"
-import { mockServer } from "~/api"
+import { mockServer } from "~/mocks"
 
 if (env.isDev && env.isMock) {
   mockServer()

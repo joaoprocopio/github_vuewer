@@ -1,12 +1,12 @@
-import { githubHttpClient } from "./github-http-client"
+import { $axios } from "./axios"
 
-const searchUser = (query) =>
-  githubHttpClient
-    .get(`/search/users?q=${query}`)
+const searchUser = (params) =>
+  $axios
+    .get("/search/users", { params: params })
     .then((response) => response.data)
 
 const searchRepo = (query) =>
-  githubHttpClient
+  $axios
     .get(`/search/repositories?q=${query}`)
     .then((response) => response.data)
 

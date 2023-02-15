@@ -1,2 +1,2 @@
-export * from "./github"
-export * from "./mock"
+export * from "./axios"
+export * from "./github-api"
