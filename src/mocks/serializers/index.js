@@ -1,5 +1,8 @@
 import { ActiveModelSerializer } from "miragejs"
 
 export const serializers = {
-  user: ActiveModelSerializer,
+  user: ActiveModelSerializer.extend({
+    embed: true,
+    root: false,
+  }),
 }
