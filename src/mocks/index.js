@@ -1,26 +1,24 @@
-import { createServer, Model } from "miragejs"
+import { createServer } from "miragejs"
 
-export const mockServer = ({ environment = "development" } = {}) => {
-  let server = createServer({
+import { factories } from "./factories"
+import { models } from "./models"
+import { routes } from "./routes"
+import { seeds } from "./seeds"
+import { serializers } from "./serializers"
+
+const config = function (environment) {
+  const config = {
+    factories,
     environment,
+    models,
+    routes,
+    seeds,
+    serializers,
+  }
 
-    models: {
-      user: Model,
-    },
+  return config
+}
 
-    seeds(server) {
-      server.create("user", { username: "joaoprocopio" })
-      server.create("user", { username: "alliceprocopio" })
-    },
-
-    routes() {
-      this.get("users/:username", (schema, request) => {
-        const username = request.params.username
-
-        return schema.users.findBy({ username: username })
-      })
-    },
-  })
-
-  return server
+export const mockServer = function ({ environment = "development" } = {}) {
+  return createServer(config(environment))
 }
