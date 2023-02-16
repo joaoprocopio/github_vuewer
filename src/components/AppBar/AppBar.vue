@@ -22,7 +22,7 @@
           <AppBarSelect
             :items="$repository.items"
             :loading="$repository.loading"
-            @get="getRepository" />
+            @get="getRepositoryContentsDebounced" />
         </VCol>
       </VRow>
     </VResponsive>
@@ -73,13 +73,15 @@
     $repository.items = await GithubServices.getUserRepositories(
       username
     ).finally(() => {
+      $user.name = username
       $repository.loading = false
     })
   }
-  const getRepository = async (repository) => {
+  const getRepositoryContents = async (repository) => {
     console.log(repository)
   }
 
   const searchUserDebounced = debounce(searchUser, 500)
   const getUserRepositoriesDebounced = debounce(getUserRepositories, 500)
+  const getRepositoryContentsDebounced = debounce(getRepositoryContents, 500)
 </script>

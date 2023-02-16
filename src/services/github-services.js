@@ -6,11 +6,17 @@ const searchUsers = async (params) =>
     .catch((error) => Promise.reject(error))
 
 const getUserRepositories = async (username, params) =>
-  GithubApi.getUserRepositories(username, { params: params }).then(
-    ({ data }) => data
-  )
+  GithubApi.getUserRepositories(username, { params: params })
+    .then(({ data }) => data)
+    .catch((error) => Promise.reject(error))
+
+const getRepositoryContents = async (username, repository) =>
+  GithubApi.getRepositoryContents(username, repository)
+    .then(({ data }) => data)
+    .catch((error) => Promise.reject(error))
 
 export const GithubServices = {
   searchUsers,
   getUserRepositories,
+  getRepositoryContents,
 }
