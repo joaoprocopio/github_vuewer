@@ -1,25 +1,24 @@
 <template>
-  <VForm @submit.prevent="$emit('search-page', searchParam)">
+  <VForm @submit.prevent="$emit('searchPage', searchParam)">
     <VAutocomplete
-      v-model="searchParam"
+      v-model:search="searchParam"
       :loading="$props.isSearching"
       :disabled="$props.isDisabled"
       :items="$props.searchResult"
       :prepend-inner-icon="$props.icon"
       item-title="login"
       hide-no-data
-      on-update:search=""
+      hide-details
       density="compact"
-      hide-details="auto"
       variant="filled"
-      @input="$emit('search-bar', searchParam)" />
+      @input="$emit('searchBar', searchParam)" />
   </VForm>
 </template>
 
 <script setup>
   import { ref } from "vue"
 
-  const $emit = defineEmits(["search-bar", "search-page"])
+  const $emit = defineEmits(["searchBar", "searchPage"])
 
   const $props = defineProps({
     searchResult: {

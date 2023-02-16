@@ -1,5 +1,6 @@
 export const env = {
-  isDev: import.meta.env.MODE === "development",
+  isDev: import.meta.env.DEV,
   isMock: import.meta.env.VITE_API_MOCK === "true",
-  apiUrl: import.meta.env.VITE_API_URL,
+  apiMockUrl: import.meta.env.VITE_API_MOCK_URL,
+  apiUrl: import.meta.env.VITE_API_PROD_URL,
 }

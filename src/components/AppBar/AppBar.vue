@@ -20,7 +20,7 @@
         :search-result="$userSearch.searchResult"
         :is-searching="$userSearch.isSearching"
         :is-disabled="$userSearch.isDisabled"
-        @search-bar="searchUser" />
+        @search-bar="searchUserDebounced" />
     </VResponsive>
     <VResponsive max-width="300">
       <AppBarSearch
@@ -28,7 +28,7 @@
         :search-result="$repositorySearch.searchResult"
         :is-searching="$repositorySearch.isSearching"
         :is-disabled="$repositorySearch.isDisabled"
-        @search-bar="searchRepository" />
+        @search-bar="searchRepositoryDebounced" />
     </VResponsive>
 
     <template #append>
@@ -51,11 +51,18 @@
   const $userSearch = useSearch()
   const $repositorySearch = useSearch()
 
-  const searchUser = debounce(async (params) => {
-    $userSearch.searchResult = await GithubServices.searchUsers(params).then(
-      (response) => response.items
-    )
-  }, 500)
+  const searchUser = async (params) => {
+    if (!params) {
+      return
+    }
+    return ($userSearch.searchResult = await GithubServices.searchUsers({
+      q: params,
+    }))
+  }
 
-  const searchRepository = debounce(() => console.log("aiusdhaiusdh"), 500)
+  const searchUserDebounced = debounce(searchUser, 500)
+
+  const searchRepository = () => {}
+
+  const searchRepositoryDebounced = debounce(searchRepository, 500)
 </script>
