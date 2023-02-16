@@ -3,7 +3,7 @@ import { Response } from "miragejs"
 export const search = function (server) {
   server.config({
     routes() {
-      this.namespace = "/api/search/"
+      this.namespace = "/api/search"
 
       this.get("/users", function (schema, request) {
         const params = {

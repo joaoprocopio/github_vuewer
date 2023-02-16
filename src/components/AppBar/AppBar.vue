@@ -78,7 +78,15 @@
     })
   }
   const getRepositoryContents = async (repository) => {
-    console.log(repository)
+    $repository.loading = true
+
+    $repository.contents = await GithubServices.getRepositoryContents(
+      $user.name,
+      repository
+    ).finally(() => {
+      $repository.name = repository
+      $repository.loading = false
+    })
   }
 
   const searchUserDebounced = debounce(searchUser, 500)
