@@ -1,4 +1,5 @@
+import { userSeeds } from "~/mocks/configs"
+
 export function seeds(server) {
-  server.loadFixtures()
-  server.createList("user", 500)
+  server.createList("user", userSeeds)
 }
