@@ -2,12 +2,12 @@
   <VAutocomplete
     v-model="result"
     v-model:search="query"
-    :loading="$props.loading"
     :items="$props.items"
+    :loading="$props.loading"
+    item-title="login"
     prepend-inner-icon="person"
     variant="filled"
     density="compact"
-    item-title="login"
     hide-no-data
     hide-details
     @update:search="$emit('search', query)"

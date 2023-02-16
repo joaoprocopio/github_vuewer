@@ -19,7 +19,9 @@
             @get="getUserRepositoriesDebounced" />
         </VCol>
         <VCol>
-          <AppBarSelect />
+          <AppBarSelect
+            :items="$repository.items"
+            :loading="$repository.loading" />
         </VCol>
       </VRow>
     </VResponsive>
