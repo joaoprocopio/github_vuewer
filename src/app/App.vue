@@ -1,6 +1,5 @@
 <template>
   <VApp :theme="$theme.theme">
-    <!-- TODO: trocar search user por get users -->
     <AppBar
       :theme="$theme.theme"
       :users="$user.items"
@@ -8,7 +7,7 @@
       :users-loading="$user.loading"
       :repositories-loading="$repository.loading"
       @toggle-theme="$theme.toggleTheme"
-      @search-user="searchUserDebounced"
+      @get-users="getUsersDebounced"
       @get-user-repos="getUserRepositoriesDebounced"
       @get-repository-contents="getRepositoryContentsDebounced" />
     <VMain>
@@ -28,7 +27,7 @@
   const $user = useUserStore()
   const $repository = useRepositoryStore()
 
-  const searchUser = async (username) => {
+  const getUsers = async (username) => {
     if (!username) {
       return
     }
@@ -43,7 +42,7 @@
 
     $user.loading = true
 
-    $user.items = await GithubServices.searchUsers(params).finally(() => {
+    $user.items = await GithubServices.getUsers(params).finally(() => {
       $user.loading = false
     })
   }
@@ -69,7 +68,7 @@
     })
   }
 
-  const searchUserDebounced = debounce(searchUser, 500)
+  const getUsersDebounced = debounce(getUsers, 500)
   const getUserRepositoriesDebounced = debounce(getUserRepositories, 500)
   const getRepositoryContentsDebounced = debounce(getRepositoryContents, 500)
 </script>

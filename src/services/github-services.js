@@ -1,7 +1,7 @@
 import { GithubApi } from "~/api"
 
-const searchUsers = async (params) =>
-  GithubApi.searchUsers(params)
+const getUsers = async (params) =>
+  GithubApi.getUsers(params)
     .then(({ data }) => data.items)
     .catch((error) => Promise.reject(error))
 
@@ -16,7 +16,7 @@ const getRepositoryContents = async (username, repository) =>
     .catch((error) => Promise.reject(error))
 
 export const GithubServices = {
-  searchUsers,
+  getUsers,
   getUserRepositories,
   getRepositoryContents,
 }

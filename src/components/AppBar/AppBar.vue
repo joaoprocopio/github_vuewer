@@ -18,7 +18,7 @@
             density="compact"
             hide-no-data
             hide-details
-            @update:search="$emit('searchUser', usernameQuery)"
+            @update:search="$emit('getUsers', usernameQuery)"
             @update:model-value="$emit('getUserRepos', usernameFind)" />
         </VCol>
         <VCol>
@@ -79,7 +79,7 @@
   })
   const $emit = defineEmits([
     "toggleTheme",
-    "searchUser",
+    "getUsers",
     "getUserRepos",
     "getRepositoryContents",
   ])
