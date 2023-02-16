@@ -7,85 +7,80 @@
     <VResponsive>
       <VRow>
         <VCol>
-          <AppBarAutocomplete
-            :items="$user.items"
-            :loading="$user.loading"
-            @search="searchUserDebounced"
-            @get="getUserRepositoriesDebounced" />
+          <VAutocomplete
+            v-model="usernameFind"
+            v-model:search="usernameQuery"
+            :items="$props.users"
+            :loading="$props.usersLoading"
+            item-title="login"
+            prepend-inner-icon="person"
+            variant="filled"
+            density="compact"
+            hide-no-data
+            hide-details
+            @update:search="$emit('searchUser', usernameQuery)"
+            @update:model-value="$emit('getUserRepos', usernameFind)" />
         </VCol>
         <VCol>
-          <AppBarSelect
-            :items="$repository.items"
-            :loading="$repository.loading"
-            @get="getRepositoryContentsDebounced" />
+          <VSelect
+            v-model="repositorySelected"
+            :items="$props.repositories"
+            :loading="$props.repositoriesLoading"
+            item-title="name"
+            prepend-inner-icon="collections_bookmark"
+            variant="filled"
+            density="compact"
+            hide-no-data
+            hide-details
+            @update:model-value="
+              $emit('getRepositoryContents', repositorySelected)
+            " />
         </VCol>
       </VRow>
     </VResponsive>
 
     <template #append>
-      <AppBarThemeButton />
+      <VBtn
+        :icon="$props.theme === 'light' ? 'light_mode' : 'dark_mode'"
+        variant="plain"
+        @click="$emit('toggleTheme')" />
     </template>
   </VAppBar>
 </template>
 
 <script setup>
-  import { debounce } from "lodash"
+  import { ref } from "vue"
 
-  import {
-    AppBarAutocomplete,
-    AppBarSelect,
-    AppBarThemeButton,
-  } from "~/components"
+  const usernameQuery = ref("")
+  const usernameFind = ref("")
+  const repositorySelected = ref("")
 
-  import { GithubServices } from "~/services"
-  import { useThemeStore, useUserStore, useRepositoryStore } from "~/stores"
-
-  const $theme = useThemeStore()
-  const $user = useUserStore()
-  const $repository = useRepositoryStore()
-
-  const searchUser = async (query) => {
-    if (!query) {
-      return
-    }
-    if ($user.items.findIndex((user) => user?.login === query) === 0) {
-      return
-    }
-
-    const params = {
-      q: query,
-      per_page: 5,
-    }
-
-    $user.loading = true
-
-    $user.items = await GithubServices.searchUsers(params).finally(() => {
-      $user.loading = false
-    })
-  }
-  const getUserRepositories = async (username) => {
-    $repository.loading = true
-
-    $repository.items = await GithubServices.getUserRepositories(
-      username
-    ).finally(() => {
-      $user.name = username
-      $repository.loading = false
-    })
-  }
-  const getRepositoryContents = async (repository) => {
-    $repository.loading = true
-
-    $repository.contents = await GithubServices.getRepositoryContents(
-      $user.name,
-      repository
-    ).finally(() => {
-      $repository.name = repository
-      $repository.loading = false
-    })
-  }
-
-  const searchUserDebounced = debounce(searchUser, 500)
-  const getUserRepositoriesDebounced = debounce(getUserRepositories, 500)
-  const getRepositoryContentsDebounced = debounce(getRepositoryContents, 500)
+  const $props = defineProps({
+    theme: {
+      type: String,
+      required: true,
+    },
+    users: {
+      type: Array,
+      required: true,
+    },
+    repositories: {
+      type: Array,
+      required: true,
+    },
+    usersLoading: {
+      type: Boolean,
+      required: true,
+    },
+    repositoriesLoading: {
+      type: Boolean,
+      required: true,
+    },
+  })
+  const $emit = defineEmits([
+    "toggleTheme",
+    "searchUser",
+    "getUserRepos",
+    "getRepositoryContents",
+  ])
 </script>
