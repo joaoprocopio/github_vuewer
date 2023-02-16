@@ -7,9 +7,6 @@ export const repository = Factory.extend({
   name() {
     return faker.git.branch()
   },
-  fullName() {
-    return `${this.name}`
-  },
   ownerId() {
     return random(1, userSeeds)
   },
