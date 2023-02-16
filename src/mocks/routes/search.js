@@ -17,6 +17,7 @@ export const search = function (server) {
         }
 
         const items = this.serialize(
+          // TODO: isso daqui é MUITO, mas MUITO LENTO!!!!!!!!
           schema.users.where((obj) =>
             obj.login.toLowerCase().includes(params.q.toLowerCase())
           )

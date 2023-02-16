@@ -12,24 +12,10 @@
         icon="home" />
     </template>
 
-    <VResponsive
-      class="mr-8"
-      max-width="300">
-      <AppBarSearch
-        icon="person"
-        :search-result="$userSearch.searchResult"
-        :is-searching="$userSearch.isSearching"
-        :is-disabled="$userSearch.isDisabled"
-        @search-bar="searchUserDebounced" />
-    </VResponsive>
-    <VResponsive max-width="300">
-      <AppBarSearch
-        icon="collections_bookmark"
-        :search-result="$repositorySearch.searchResult"
-        :is-searching="$repositorySearch.isSearching"
-        :is-disabled="$repositorySearch.isDisabled"
-        @search-bar="searchRepositoryDebounced" />
-    </VResponsive>
+    <AppBarSearch
+      :search-result="$userSearch.searchResult"
+      :is-searching="$userSearch.isSearching"
+      @search="searchUserDebounced" />
 
     <template #append>
       <VBtn
@@ -42,27 +28,29 @@
 </template>
 
 <script setup>
-  import { GithubServices } from "~/services"
-  import { AppBarSearch } from "~/components"
-  import { useGlobalTheme, useSearch } from "~/stores"
   import { debounce } from "lodash"
+
+  import { AppBarSearch } from "~/components"
+
+  import { GithubServices } from "~/services"
+  import { useGlobalTheme, useSearch } from "~/stores"
 
   const $globalTheme = useGlobalTheme()
   const $userSearch = useSearch()
-  const $repositorySearch = useSearch()
 
-  const searchUser = async (params) => {
-    if (!params) {
+  const searchUser = async (query) => {
+    if (!query) {
       return
     }
-    return ($userSearch.searchResult = await GithubServices.searchUsers({
-      q: params,
-    }))
+
+    $userSearch.isSearching = true
+
+    $userSearch.searchResult = await GithubServices.searchUsers({
+      q: query,
+      per_page: 5,
+    }).finally(() => {
+      $userSearch.isSearching = false
+    })
   }
-
   const searchUserDebounced = debounce(searchUser, 500)
-
-  const searchRepository = () => {}
-
-  const searchRepositoryDebounced = debounce(searchRepository, 500)
 </script>

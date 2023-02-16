@@ -1,24 +1,37 @@
 <template>
-  <VForm @submit.prevent="$emit('searchPage', searchParam)">
-    <VAutocomplete
-      v-model:search="searchParam"
-      :loading="$props.isSearching"
-      :disabled="$props.isDisabled"
-      :items="$props.searchResult"
-      :prepend-inner-icon="$props.icon"
-      item-title="login"
-      hide-no-data
-      hide-details
-      density="compact"
-      variant="filled"
-      @input="$emit('searchBar', searchParam)" />
-  </VForm>
+  <VResponsive>
+    <VRow>
+      <VCol>
+        <VAutocomplete
+          v-model="result"
+          v-model:search="query"
+          :loading="$props.isSearching"
+          :items="$props.searchResult"
+          prepend-inner-icon="person"
+          variant="filled"
+          density="compact"
+          item-title="login"
+          hide-no-data
+          hide-details
+          @update:search="$emit('search', query)"
+          @update:model-value="$emit('get', result)" />
+      </VCol>
+      <VCol>
+        <VSelect
+          prepend-inner-icon="collections_bookmark"
+          variant="filled"
+          density="compact"
+          hide-no-data
+          hide-details />
+      </VCol>
+    </VRow>
+  </VResponsive>
 </template>
 
 <script setup>
   import { ref } from "vue"
 
-  const $emit = defineEmits(["searchBar", "searchPage"])
+  const $emit = defineEmits(["search", "get"])
 
   const $props = defineProps({
     searchResult: {
@@ -26,19 +39,12 @@
       required: true,
       default: () => [],
     },
-    icon: {
-      type: String,
-      required: true,
-    },
     isSearching: {
-      type: Boolean,
-      default: false,
-    },
-    isDisabled: {
       type: Boolean,
       default: false,
     },
   })
 
-  const searchParam = ref("")
+  const query = ref("")
+  const result = ref("")
 </script>
