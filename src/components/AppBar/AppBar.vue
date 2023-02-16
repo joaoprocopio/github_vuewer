@@ -1,12 +1,7 @@
 <template>
-  <VAppBar
-    border
-    elevation="0"
-    density="comfortable">
+  <VAppBar border elevation="0" density="comfortable">
     <template #prepend>
-      <VBtn
-        variant="plain"
-        icon="travel_explore" />
+      <VBtn variant="plain" icon="travel_explore" />
     </template>
 
     <VResponsive>
@@ -28,10 +23,7 @@
     </VResponsive>
 
     <template #append>
-      <VBtn
-        :icon="$theme.theme === 'light' ? 'light_mode' : 'dark_mode'"
-        variant="plain"
-        @click="$theme.toggleTheme" />
+      <AppBarThemeButton />
     </template>
   </VAppBar>
 </template>
@@ -39,7 +31,11 @@
 <script setup>
   import { debounce } from "lodash"
 
-  import { AppBarAutocomplete, AppBarSelect } from "~/components"
+  import {
+    AppBarAutocomplete,
+    AppBarSelect,
+    AppBarThemeButton,
+  } from "~/components"
 
   import { GithubServices } from "~/services"
   import { useThemeStore, useUserStore, useRepositoryStore } from "~/stores"
