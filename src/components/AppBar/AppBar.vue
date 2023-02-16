@@ -13,9 +13,10 @@
       <VRow>
         <VCol>
           <AppBarAutocomplete
-            :search-result="$userSearch.searchResult"
-            :is-searching="$userSearch.isSearching"
-            @search="searchUserDebounced" />
+            :search-result="$user.searchResult"
+            :is-searching="$user.isSearching"
+            @search="searchUserDebounced"
+            @get="getUserReposDebounced" />
         </VCol>
         <VCol>
           <AppBarSelect />
@@ -38,24 +39,27 @@
   import { AppBarAutocomplete, AppBarSelect } from "~/components"
 
   import { GithubServices } from "~/services"
-  import { useThemeStore, useSearchStore } from "~/stores"
+  import { useThemeStore, useUserStore } from "~/stores"
 
   const $theme = useThemeStore()
-  const $userSearch = useSearchStore()
+  const $user = useUserStore()
 
   const searchUser = async (query) => {
     if (!query) {
       return
     }
 
-    $userSearch.isSearching = true
+    $user.isSearching = true
 
-    $userSearch.searchResult = await GithubServices.searchUsers({
+    $user.searchResult = await GithubServices.searchUsers({
       q: query,
       per_page: 5,
     }).finally(() => {
-      $userSearch.isSearching = false
+      $user.isSearching = false
     })
   }
+  const getUserRepos = async () => {}
+
   const searchUserDebounced = debounce(searchUser, 500)
+  const getUserReposDebounced = debounce(getUserRepos, 500)
 </script>

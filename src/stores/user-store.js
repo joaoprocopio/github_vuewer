@@ -1,7 +1,7 @@
 import { ref } from "vue"
 import { defineStore } from "pinia"
 
-export const useSearchStore = defineStore("searchStore", () => {
+export const useUserStore = defineStore("userStore", () => {
   const searchResult = ref([])
   const isSearching = ref(false)
 
