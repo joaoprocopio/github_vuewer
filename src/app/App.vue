@@ -31,9 +31,6 @@
     if (!username) {
       return
     }
-    if ($user.items.findIndex((user) => user?.login === username) === 0) {
-      return
-    }
 
     const params = {
       q: username,
