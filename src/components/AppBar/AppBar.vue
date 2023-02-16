@@ -33,10 +33,10 @@
   import { AppBarSearch } from "~/components"
 
   import { GithubServices } from "~/services"
-  import { useGlobalTheme, useSearch } from "~/stores"
+  import { useGlobalThemeStore, useSearchStore } from "~/stores"
 
-  const $globalTheme = useGlobalTheme()
-  const $userSearch = useSearch()
+  const $globalTheme = useGlobalThemeStore()
+  const $userSearch = useSearchStore()
 
   const searchUser = async (query) => {
     if (!query) {

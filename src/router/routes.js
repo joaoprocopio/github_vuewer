@@ -1,6 +1,6 @@
 import { HomePage, ErrorPage } from "~/pages"
 
-const routes = [
+export const routes = [
   {
     path: "/",
     component: HomePage,
@@ -12,5 +12,3 @@ const routes = [
     name: "error-page",
   },
 ]
-
-export { routes }
