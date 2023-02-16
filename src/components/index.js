@@ -1,2 +1,2 @@
 export * from "./AppBar"
-export * from "./AppBarSearch"
+export * from "./AppBar"

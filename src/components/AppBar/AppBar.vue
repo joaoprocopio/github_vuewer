@@ -12,10 +12,19 @@
         icon="home" />
     </template>
 
-    <AppBarSearch
-      :search-result="$userSearch.searchResult"
-      :is-searching="$userSearch.isSearching"
-      @search="searchUserDebounced" />
+    <VResponsive>
+      <VRow>
+        <VCol>
+          <AppBarAutocomplete
+            :search-result="$userSearch.searchResult"
+            :is-searching="$userSearch.isSearching"
+            @search="searchUserDebounced" />
+        </VCol>
+        <VCol>
+          <AppBarSelect />
+        </VCol>
+      </VRow>
+    </VResponsive>
 
     <template #append>
       <VBtn
@@ -30,7 +39,7 @@
 <script setup>
   import { debounce } from "lodash"
 
-  import { AppBarSearch } from "~/components"
+  import { AppBarAutocomplete, AppBarSelect } from "~/components"
 
   import { GithubServices } from "~/services"
   import { useGlobalThemeStore, useSearchStore } from "~/stores"
