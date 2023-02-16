@@ -39,10 +39,11 @@
   import { AppBarAutocomplete, AppBarSelect } from "~/components"
 
   import { GithubServices } from "~/services"
-  import { useThemeStore, useUserStore } from "~/stores"
+  import { useThemeStore, useUserStore, useRepositoryStore } from "~/stores"
 
   const $theme = useThemeStore()
   const $user = useUserStore()
+  const $repository = useRepositoryStore()
 
   const searchUser = async (query) => {
     if (!query) {
@@ -59,12 +60,12 @@
     })
   }
   const getUserRepositories = async (username) => {
-    $user.isSearching = true
+    $repository.isSearching = true
 
-    $user.repositories = await GithubServices.getUserRepositories(
+    $repository.repositories = await GithubServices.getUserRepositories(
       username
     ).finally(() => {
-      $user.isSearching = false
+      $repository.isSearching = false
     })
   }
 

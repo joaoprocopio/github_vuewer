@@ -2,7 +2,7 @@
   <VApp :theme="$theme.theme">
     <AppBar />
     <VMain>
-      <slot />
+      <!-- TODO: aqui vai a tela de interação com o repositório -->
     </VMain>
   </VApp>
 </template>
