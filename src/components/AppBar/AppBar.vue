@@ -1,15 +1,12 @@
 <template>
   <VAppBar
-    class="px-4"
+    border
     elevation="0"
-    density="comfortable"
-    border>
+    density="comfortable">
     <template #prepend>
       <VBtn
-        class="mr-2"
-        :to="{ name: 'home-page' }"
         variant="plain"
-        icon="home" />
+        icon="travel_explore" />
     </template>
 
     <VResponsive>
@@ -28,7 +25,6 @@
 
     <template #append>
       <VBtn
-        class="ml-2"
         :icon="$theme.theme === 'light' ? 'light_mode' : 'dark_mode'"
         variant="plain"
         @click="$theme.toggleTheme" />
