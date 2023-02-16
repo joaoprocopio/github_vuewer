@@ -21,7 +21,8 @@
         <VCol>
           <AppBarSelect
             :items="$repository.items"
-            :loading="$repository.loading" />
+            :loading="$repository.loading"
+            @get="getRepository" />
         </VCol>
       </VRow>
     </VResponsive>
@@ -74,6 +75,9 @@
     ).finally(() => {
       $repository.loading = false
     })
+  }
+  const getRepository = async (repository) => {
+    console.log(repository)
   }
 
   const searchUserDebounced = debounce(searchUser, 500)
