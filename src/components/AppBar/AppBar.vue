@@ -29,9 +29,9 @@
     <template #append>
       <VBtn
         class="ml-2"
-        :icon="$globalTheme.theme === 'light' ? 'light_mode' : 'dark_mode'"
+        :icon="$theme.theme === 'light' ? 'light_mode' : 'dark_mode'"
         variant="plain"
-        @click="$globalTheme.toggleTheme" />
+        @click="$theme.toggleTheme" />
     </template>
   </VAppBar>
 </template>
@@ -42,9 +42,9 @@
   import { AppBarAutocomplete, AppBarSelect } from "~/components"
 
   import { GithubServices } from "~/services"
-  import { useGlobalThemeStore, useSearchStore } from "~/stores"
+  import { useThemeStore, useSearchStore } from "~/stores"
 
-  const $globalTheme = useGlobalThemeStore()
+  const $theme = useThemeStore()
   const $userSearch = useSearchStore()
 
   const searchUser = async (query) => {

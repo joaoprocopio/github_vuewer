@@ -1,5 +1,5 @@
 <template>
-  <VApp :theme="$globalTheme.theme">
+  <VApp :theme="$theme.theme">
     <AppBar />
     <VMain>
       <slot />
@@ -9,7 +9,7 @@
 
 <script setup>
   import { AppBar } from "~/components"
-  import { useGlobalThemeStore } from "../stores"
+  import { useThemeStore } from "../stores"
 
-  const $globalTheme = useGlobalThemeStore()
+  const $theme = useThemeStore()
 </script>
