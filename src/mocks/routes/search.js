@@ -5,7 +5,7 @@ export const search = function (server) {
     routes() {
       this.namespace = "/api/search/"
 
-      this.get("/users/", function (schema, request) {
+      this.get("/users", function (schema, request) {
         const params = {
           q: request?.queryParams?.q,
           page: parseInt(request?.queryParams?.page) || 1,
@@ -16,11 +16,8 @@ export const search = function (server) {
           return new Response(422, {}, {})
         }
 
-        const items = this.serialize(
-          // TODO: isso daqui é MUITO, mas MUITO LENTO!!!!!!!!
-          schema.users.where((obj) =>
-            obj.login.toLowerCase().includes(params.q.toLowerCase())
-          )
+        const items = schema.users.where((obj) =>
+          obj.login.toLowerCase().includes(params.q.toLowerCase())
         )
 
         const totalCount = items.length
@@ -30,7 +27,7 @@ export const search = function (server) {
           {},
           {
             total_count: totalCount,
-            items: items
+            items: this.serialize(items)
               .slice(
                 params.page * params.per_page - params.per_page,
                 params.page * params.per_page

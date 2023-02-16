@@ -13,7 +13,7 @@
       <VRow>
         <VCol>
           <AppBarAutocomplete
-            :search-result="$user.searchResult"
+            :search-result="$user.search"
             :is-searching="$user.isSearching"
             @search="searchUserDebounced"
             @get="getUserReposDebounced" />
@@ -51,14 +51,20 @@
 
     $user.isSearching = true
 
-    $user.searchResult = await GithubServices.searchUsers({
+    $user.search = await GithubServices.searchUsers({
       q: query,
       per_page: 5,
     }).finally(() => {
       $user.isSearching = false
     })
   }
-  const getUserRepos = async () => {}
+  const getUserRepos = async (username) => {
+    $user.isSearching = true
+
+    $user.repos = await GithubServices.getUserRepos(username).finally(() => {
+      $user.isSearching = false
+    })
+  }
 
   const searchUserDebounced = debounce(searchUser, 500)
   const getUserReposDebounced = debounce(getUserRepos, 500)
