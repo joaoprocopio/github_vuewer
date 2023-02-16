@@ -2,9 +2,9 @@ import { ref } from "vue"
 import { defineStore } from "pinia"
 
 export const useUserStore = defineStore("userStore", () => {
-  const repos = ref([])
+  const repositories = ref([])
   const search = ref([])
   const isSearching = ref(false)
 
-  return { repos, search, isSearching }
+  return { repositories, search, isSearching }
 })

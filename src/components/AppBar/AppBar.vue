@@ -16,7 +16,7 @@
             :search-result="$user.search"
             :is-searching="$user.isSearching"
             @search="searchUserDebounced"
-            @get="getUserReposDebounced" />
+            @get="getUserRepositoriesDebounced" />
         </VCol>
         <VCol>
           <AppBarSelect />
@@ -58,14 +58,16 @@
       $user.isSearching = false
     })
   }
-  const getUserRepos = async (username) => {
+  const getUserRepositories = async (username) => {
     $user.isSearching = true
 
-    $user.repos = await GithubServices.getUserRepos(username).finally(() => {
+    $user.repositories = await GithubServices.getUserRepositories(
+      username
+    ).finally(() => {
       $user.isSearching = false
     })
   }
 
   const searchUserDebounced = debounce(searchUser, 500)
-  const getUserReposDebounced = debounce(getUserRepos, 500)
+  const getUserRepositoriesDebounced = debounce(getUserRepositories, 500)
 </script>

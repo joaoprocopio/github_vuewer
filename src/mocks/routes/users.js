@@ -6,11 +6,19 @@ export const users = function (server) {
       this.namespace = "/api/users"
 
       this.get("/:username/repos", function (schema, request) {
-        return new Response(
-          200,
-          {},
-          schema.users.findBy({ login: request.params.username })
+        const username = request?.params?.username
+
+        if (!username) {
+          return new Response(422, {}, {})
+        }
+
+        const repositories = this.serialize(schema.repositories.all()).filter(
+          (repository) => {
+            return repository.owner.login === username
+          }
         )
+
+        return new Response(200, {}, repositories)
       })
     },
   })

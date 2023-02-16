@@ -5,4 +5,9 @@ export const serializers = {
     embed: true,
     root: false,
   }),
+  repository: ActiveModelSerializer.extend({
+    embed: true,
+    root: false,
+    include: ["owner"],
+  }),
 }
