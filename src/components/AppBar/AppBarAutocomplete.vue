@@ -2,8 +2,8 @@
   <VAutocomplete
     v-model="result"
     v-model:search="query"
-    :loading="$props.isSearching"
-    :items="$props.searchResult"
+    :loading="$props.loading"
+    :items="$props.items"
     prepend-inner-icon="person"
     variant="filled"
     density="compact"
@@ -20,12 +20,12 @@
   const $emit = defineEmits(["search", "get"])
 
   const $props = defineProps({
-    searchResult: {
+    items: {
       type: Array,
       required: true,
       default: () => [],
     },
-    isSearching: {
+    loading: {
       type: Boolean,
       default: false,
     },
