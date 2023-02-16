@@ -3,13 +3,13 @@
     <AppBar
       :theme="$theme.theme"
       :users="$user.items"
-      :repositories="$repository.items"
       :users-loading="$user.loading"
+      :repositories="$repository.items"
       :repositories-loading="$repository.loading"
-      @toggle-theme="$theme.toggleTheme"
       @get-users="getUsersDebounced"
       @get-user-repos="getUserRepositoriesDebounced"
-      @get-repository-contents="getRepositoryContentsDebounced" />
+      @get-repository-contents="getRepositoryContentsDebounced"
+      @toggle-theme="$theme.toggleTheme" />
     <VMain>
       <!-- TODO: aqui vai a tela de interação com o repositório -->
     </VMain>
