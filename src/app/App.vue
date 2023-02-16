@@ -1,9 +1,16 @@
 <template>
-  <AppLayout>
-    <RouterView />
-  </AppLayout>
+  <VApp :theme="$globalTheme.theme">
+    <AppBar />
+    <VMain>
+      <slot />
+    </VMain>
+    <VFooter />
+  </VApp>
 </template>
 
 <script setup>
-  import AppLayout from "./AppLayout.vue"
+  import { AppBar } from "~/components"
+  import { useGlobalThemeStore } from "../stores"
+
+  const $globalTheme = useGlobalThemeStore()
 </script>
