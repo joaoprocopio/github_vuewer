@@ -1,4 +1,4 @@
-name: life-ci
+name: deploy
 
 on:
   push:
