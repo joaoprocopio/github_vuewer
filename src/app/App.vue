@@ -11,14 +11,30 @@
       @get-repository-contents="getRepositoryContentsDebounced"
       @toggle-theme="$theme.toggleTheme" />
     <VMain>
-      <VResponsive class="mx-auto px-8 py-16" max-width="600">
+      <VResponsive class="mx-auto px-4 pt-8 pb-16" max-width="1200">
+        <VRow
+          v-if="$repository.orderedContents.length > 0"
+          align="center"
+          class="pb-6"
+          @click="getRepositoryContents($repository.name)">
+          <VBtn variant="plain" icon="home" />
+          <VCode class="font-weight-bold text-h6">
+            /{{ $repository.path }}
+          </VCode>
+        </VRow>
+
         <template
           v-for="content in $repository.orderedContents"
           :key="content.id">
           <template v-if="content.type === 'dir'">
             <VRow align="center">
-              <VBtn disabled variant="plain" icon="folder" />
-              <VCode> {{ content.name }}/ </VCode>
+              <VBtn
+                variant="plain"
+                icon="folder"
+                @click="
+                  getRepositoryContents($repository.name, content.path)
+                " />
+              <VCode> {{ content.name }} </VCode>
             </VRow>
           </template>
           <template v-if="content.type === 'file'">
@@ -70,14 +86,17 @@
       $repository.loading = false
     })
   }
-  const getRepositoryContents = async (repository) => {
+  const getRepositoryContents = async (repository, path) => {
+    console.log(path)
     $repository.loading = true
 
     $repository.contents = await GithubServices.getRepositoryContents(
       $user.name,
-      repository
+      repository,
+      path
     ).finally(() => {
       $repository.name = repository
+      $repository.path = path
       $repository.loading = false
     })
   }

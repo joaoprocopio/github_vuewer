@@ -4,39 +4,35 @@
       <VBtn disabled variant="plain" icon="travel_explore" />
     </template>
 
+    <VResponsive max-width="600" class="pr-4">
+      <VAutocomplete
+        v-model="usernameFind"
+        v-model:search="usernameQuery"
+        :items="$props.users"
+        :loading="$props.usersLoading"
+        item-title="login"
+        prepend-inner-icon="person"
+        variant="filled"
+        density="compact"
+        hide-no-data
+        hide-details
+        @update:search="$emit('getUsers', usernameQuery)"
+        @update:model-value="$emit('getUserRepos', usernameFind)" />
+    </VResponsive>
     <VResponsive max-width="600">
-      <VRow>
-        <VCol>
-          <VAutocomplete
-            v-model="usernameFind"
-            v-model:search="usernameQuery"
-            :items="$props.users"
-            :loading="$props.usersLoading"
-            item-title="login"
-            prepend-inner-icon="person"
-            variant="filled"
-            density="compact"
-            hide-no-data
-            hide-details
-            @update:search="$emit('getUsers', usernameQuery)"
-            @update:model-value="$emit('getUserRepos', usernameFind)" />
-        </VCol>
-        <VCol>
-          <VSelect
-            v-model="repositorySelected"
-            :items="$props.repositories"
-            :loading="$props.repositoriesLoading"
-            item-title="name"
-            prepend-inner-icon="collections_bookmark"
-            variant="filled"
-            density="compact"
-            hide-no-data
-            hide-details
-            @update:model-value="
-              $emit('getRepositoryContents', repositorySelected)
-            " />
-        </VCol>
-      </VRow>
+      <VSelect
+        v-model="repositorySelected"
+        :items="$props.repositories"
+        :loading="$props.repositoriesLoading"
+        item-title="name"
+        prepend-inner-icon="collections_bookmark"
+        variant="filled"
+        density="compact"
+        hide-no-data
+        hide-details
+        @update:model-value="
+          $emit('getRepositoryContents', repositorySelected)
+        " />
     </VResponsive>
 
     <template #append>

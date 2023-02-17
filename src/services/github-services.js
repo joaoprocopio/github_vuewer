@@ -10,8 +10,8 @@ const getUserRepositories = async (username, params) =>
     .then(({ data }) => data)
     .catch((error) => Promise.reject(error))
 
-const getRepositoryContents = async (username, repository) =>
-  GithubApi.getRepositoryContents(username, repository)
+const getRepositoryContents = async (username, repository, path) =>
+  GithubApi.getRepositoryContents(username, repository, path)
     .then(({ data }) => data)
     .catch((error) => Promise.reject(error))
 

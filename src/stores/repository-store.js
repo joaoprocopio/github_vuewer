@@ -3,6 +3,7 @@ import { defineStore } from "pinia"
 
 export const useRepositoryStore = defineStore("repositoryStore", () => {
   const name = ref("")
+  const path = ref("")
   const contents = ref([])
   const items = ref([])
   const loading = ref(false)
@@ -13,5 +14,5 @@ export const useRepositoryStore = defineStore("repositoryStore", () => {
     )
   )
 
-  return { name, contents, items, loading, orderedContents }
+  return { name, path, contents, items, loading, orderedContents }
 })
