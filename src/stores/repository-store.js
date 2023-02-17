@@ -1,4 +1,4 @@
-import { ref } from "vue"
+import { ref, computed } from "vue"
 import { defineStore } from "pinia"
 
 export const useRepositoryStore = defineStore("repositoryStore", () => {
@@ -7,5 +7,9 @@ export const useRepositoryStore = defineStore("repositoryStore", () => {
   const items = ref([])
   const loading = ref(false)
 
-  return { name, contents, items, loading }
+  const orderedContents = computed(() =>
+    contents.value.sort((previous, next) => previous.type === next.type)
+  )
+
+  return { name, contents, items, loading, orderedContents }
 })

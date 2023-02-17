@@ -23,14 +23,10 @@ export const search = function (server) {
           {},
           {
             total_count: totalCount,
-            items: this.serialize(items)
-              .slice(
-                params.page * params.per_page - params.per_page,
-                params.page * params.per_page
-              )
-              .sort((a, b) => {
-                return new Date(b.updatedAt) - new Date(a.updatedAt)
-              }),
+            items: this.serialize(items).slice(
+              params.page * params.per_page - params.per_page,
+              params.page * params.per_page
+            ),
           }
         )
       })
