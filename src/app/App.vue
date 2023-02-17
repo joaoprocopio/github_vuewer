@@ -16,6 +16,7 @@
           v-for="content in $repository.orderedContents"
           :key="content.id">
           <VRow align="center">
+            <!-- TODO: dar como terminado, pq ainda não tem treeview no vuetify 3 -->
             <template v-if="content.type === 'file'">
               <VBtn disabled variant="plain" icon="insert_drive_file" />
               <div>
