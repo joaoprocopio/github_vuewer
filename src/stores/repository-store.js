@@ -8,7 +8,9 @@ export const useRepositoryStore = defineStore("repositoryStore", () => {
   const loading = ref(false)
 
   const orderedContents = computed(() =>
-    contents.value.sort((previous, next) => previous.type === next.type)
+    contents.value.sort((previous, next) =>
+      previous.type.localeCompare(next.type)
+    )
   )
 
   return { name, contents, items, loading, orderedContents }

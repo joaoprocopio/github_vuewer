@@ -1,7 +1,7 @@
 <template>
   <VAppBar border elevation="0" density="comfortable">
     <template #prepend>
-      <VBtn variant="plain" icon="travel_explore" />
+      <VBtn disabled variant="plain" icon="travel_explore" />
     </template>
 
     <VResponsive>

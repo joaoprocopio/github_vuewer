@@ -8,13 +8,13 @@ export const content = Factory.extend({
     return random(1, repositorySeeds)
   },
   name() {
-    return faker.system.fileName()
-  },
-  path() {
-    return faker.system.filePath()
+    return this.type === "file"
+      ? faker.system.commonFileName()
+      : faker.system.directoryPath().split("/")[1]
   },
   type() {
-    const types = ["file", "file", "file", "file", "file", "dir"]
-    return types[random(0, types.length)]
+    const types = [..."file ".repeat(3).trim().split(" "), "dir"]
+
+    return types[random(0, types.length - 1)]
   },
 })

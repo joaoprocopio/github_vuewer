@@ -11,18 +11,24 @@
       @get-repository-contents="getRepositoryContentsDebounced"
       @toggle-theme="$theme.toggleTheme" />
     <VMain>
-      <VResponsive class="mx-auto pt-16" max-width="600">
+      <VResponsive class="mx-auto py-16" max-width="600">
         <template
           v-for="content in $repository.orderedContents"
           :key="content.id">
-          <div v-if="content.type === 'dir'">
-            <VIcon icon="folder" />
-            {{ content.type }}
-          </div>
-          <div v-if="content.type === 'file'">
-            <VIcon icon="insert_drive_file" />
-            {{ content.type }}
-          </div>
+          <VRow align="center">
+            <template v-if="content.type === 'file'">
+              <VBtn disabled variant="plain" icon="insert_drive_file" />
+              <div>
+                {{ content.name }}
+              </div>
+            </template>
+            <template v-if="content.type === 'dir'">
+              <VBtn disabled variant="plain" icon="folder" />
+              <div>
+                {{ content.name }}
+              </div>
+            </template>
+          </VRow>
         </template>
       </VResponsive>
     </VMain>
