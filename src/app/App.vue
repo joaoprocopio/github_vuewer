@@ -11,25 +11,22 @@
       @get-repository-contents="getRepositoryContentsDebounced"
       @toggle-theme="$theme.toggleTheme" />
     <VMain>
-      <VResponsive class="mx-auto py-16" max-width="600">
+      <VResponsive class="mx-auto px-8 py-16" max-width="600">
         <template
           v-for="content in $repository.orderedContents"
           :key="content.id">
-          <VRow align="center">
-            <!-- TODO: dar como terminado, pq ainda não tem treeview no vuetify 3 -->
-            <template v-if="content.type === 'file'">
-              <VBtn disabled variant="plain" icon="insert_drive_file" />
-              <div>
-                {{ content.name }}
-              </div>
-            </template>
-            <template v-if="content.type === 'dir'">
+          <template v-if="content.type === 'dir'">
+            <VRow align="center">
               <VBtn disabled variant="plain" icon="folder" />
-              <div>
-                {{ content.name }}
-              </div>
-            </template>
-          </VRow>
+              <VCode> {{ content.name }}/ </VCode>
+            </VRow>
+          </template>
+          <template v-if="content.type === 'file'">
+            <VRow align="center">
+              <VBtn disabled variant="plain" icon="insert_drive_file" />
+              <VCode> {{ content.name }} </VCode>
+            </VRow>
+          </template>
         </template>
       </VResponsive>
     </VMain>

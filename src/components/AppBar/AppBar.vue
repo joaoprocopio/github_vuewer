@@ -4,7 +4,7 @@
       <VBtn disabled variant="plain" icon="travel_explore" />
     </template>
 
-    <VResponsive>
+    <VResponsive max-width="600">
       <VRow>
         <VCol>
           <VAutocomplete

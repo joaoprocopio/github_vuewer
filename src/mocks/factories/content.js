@@ -13,7 +13,7 @@ export const content = Factory.extend({
       : faker.system.directoryPath().split("/")[1]
   },
   type() {
-    const types = new Array(3).fill("file")
+    const types = new Array(5).fill("file")
     types.push("dir")
 
     return types[random(0, types.length - 1)]
