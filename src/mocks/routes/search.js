@@ -7,17 +7,13 @@ export const search = function (server) {
 
       this.get("/users", function (schema, request) {
         const params = {
-          q: request?.queryParams?.q,
+          username: request?.queryParams?.q,
           page: parseInt(request?.queryParams?.page) || 1,
           per_page: parseInt(request?.queryParams?.per_page) || 30,
         }
 
-        if (!params.q) {
-          return new Response(422, {}, {})
-        }
-
         const items = schema.users.where((obj) =>
-          obj.login.toLowerCase().includes(params.q.toLowerCase())
+          obj.login.toLowerCase().includes(params.username.toLowerCase())
         )
 
         const totalCount = items.length

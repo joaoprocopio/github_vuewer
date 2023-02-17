@@ -8,10 +8,6 @@ export const users = function (server) {
       this.get("/:username/repos", function (schema, request) {
         const params = { username: request?.params?.username }
 
-        if (!params.username) {
-          return new Response(422, {}, {})
-        }
-
         const repositories = this.serialize(schema.repositories.all()).filter(
           (repository) => {
             return repository.owner.login === params.username

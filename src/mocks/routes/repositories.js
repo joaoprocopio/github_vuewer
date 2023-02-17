@@ -5,15 +5,22 @@ export const repositories = function (server) {
     routes() {
       this.namespace = "/api/repos"
 
-      this.get("/:username/:repository/contents", (schema, request) => {
+      this.get("/:username/:repository/contents", function (schema, request) {
         const params = {
           username: request?.params?.username,
           repository: request?.params?.repository,
         }
 
-        console.log(params)
+        const contents = this.serialize(schema.contents.all()).filter(
+          (content) => {
+            return (
+              content.repository.name === params.repository &&
+              content.repository.owner.login === params.username
+            )
+          }
+        )
 
-        return new Response(200, {}, {})
+        return new Response(200, {}, contents)
       })
     },
   })
