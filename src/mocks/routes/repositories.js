@@ -12,12 +12,9 @@ export const repositories = function (server) {
         }
 
         const contents = this.serialize(schema.contents.all()).filter(
-          (content) => {
-            return (
-              content.repository.name === params.repository &&
-              content.repository.owner.login === params.username
-            )
-          }
+          (content) =>
+            content.repository.name === params.repository &&
+            content.repository.owner.login === params.username
         )
 
         return new Response(200, {}, contents)

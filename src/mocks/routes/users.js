@@ -9,9 +9,7 @@ export const users = function (server) {
         const params = { username: request?.params?.username }
 
         const repositories = this.serialize(schema.repositories.all()).filter(
-          (repository) => {
-            return repository.owner.login === params.username
-          }
+          (repository) => repository.owner.login === params.username
         )
 
         return new Response(200, {}, repositories)
